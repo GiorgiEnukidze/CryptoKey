@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'add_password_page.dart';
+import 'menu_drawer.dart';
+import 'encryption_service.dart';
 
 class PasswordListPage extends StatelessWidget {
+  final EncryptionService _encryptionService = EncryptionService();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Mots de passe'),
+        title: Text('Mes mots de passe'),
       ),
+      drawer: MenuDrawer(), // Ajoute le menu drawer ici
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // Ajouter ici la liste des mots de passe de l'utilisateur
-          ],
-        ),
+        child: Text('Liste des mots de passe'),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

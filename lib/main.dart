@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
-import 'login_page.dart';
+import 'package:flutter_kryptokey_1/login_page.dart';
+import 'package:flutter_kryptokey_1/password_list_page.dart';
+import 'package:flutter_kryptokey_1/add_password_page.dart';
+import 'package:flutter_kryptokey_1/secure_note_page.dart';
+import 'package:flutter_kryptokey_1/bank_card_page.dart';
+import 'package:flutter_kryptokey_1/id_card_page.dart';
+import 'package:flutter_kryptokey_1/encryption_key_page.dart';
 
 void main() {
-  runApp(CryptoKeyApp());
+  runApp(MyApp());
 }
 
-class CryptoKeyApp extends StatelessWidget {
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -14,6 +20,14 @@ class CryptoKeyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: LoginPage(),
+      routes: {
+        '/passwordList': (context) => PasswordListPage(),
+        '/addPassword': (context) => AddPasswordPage(),
+        '/secureNote': (context) => SecureNotePage(),
+        '/bankCard': (context) => BankCardPage(),
+        '/idCard': (context) => IdCardPage(),
+        '/encryptionKey': (context) => EncryptionKeyPage(),
+      },
     );
   }
 }
