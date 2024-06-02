@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:random_string/random_string.dart';
-import 'package:flutter_kryptokey_1/password_service.dart';
-import 'package:flutter_kryptokey_1/encryption_service.dart';
+import 'package:flutter/services.dart';
+import 'dart:math';
 
 class AddPasswordPage extends StatefulWidget {
   @override
@@ -9,63 +8,66 @@ class AddPasswordPage extends StatefulWidget {
 }
 
 class _AddPasswordPageState extends State<AddPasswordPage> {
-  final TextEditingController _urlController = TextEditingController();
+  final TextEditingController _siteController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final PasswordService _passwordService = PasswordService();
-  final EncryptionService _encryptionService = EncryptionService();
+  final TextEditingController _passwordLengthController = TextEditingController(text: '12');
 
-  void _generatePassword() {
-    final generatedPassword = _passwordService.generatePassword(length: 16);
-    setState(() {
-      _passwordController.text = generatedPassword;
-    });
-  }
-
-  void _savePassword() async {
-    final url = _urlController.text;
-    final username = _usernameController.text;
-    final password = _passwordController.text;
-
-    final encryptedPassword = await _encryptionService.encryptText(password);
-
-    // Add your save logic here. Example:
-    // await _encryptionService.storeEncryptedData('password_$url', encryptedPassword);
-
-    Navigator.pop(context);
+  String _generateRandomPassword(int length) {
+    const String chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#\$%^&*()_+[]{}|;:,.<>?';
+    final Random rnd = Random.secure();
+    return String.fromCharCodes(Iterable.generate(
+      length, (_) => chars.codeUnitAt(rnd.nextInt(chars.length))));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Ajouter un mot de passe'),
+        title: Text('Add Password'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          children: <Widget>[
+          children: [
             TextField(
-              controller: _urlController,
-              decoration: InputDecoration(labelText: 'URL du site'),
+              controller: _siteController,
+              decoration: InputDecoration(labelText: 'Site URL'),
             ),
             TextField(
               controller: _usernameController,
-              decoration: InputDecoration(labelText: 'Nom d\'utilisateur'),
+              decoration: InputDecoration(labelText: 'Username'),
             ),
             TextField(
               controller: _passwordController,
-              decoration: InputDecoration(labelText: 'Mot de passe'),
+              decoration: InputDecoration(labelText: 'Password'),
               obscureText: true,
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    controller: _passwordLengthController,
+                    decoration: InputDecoration(labelText: 'Password Length'),
+                    keyboardType: TextInputType.number,
+                  ),
+                ),
+                SizedBox(width: 10),
+                ElevatedButton(
+                  onPressed: () {
+                    final int length = int.parse(_passwordLengthController.text);
+                    _passwordController.text = _generateRandomPassword(length);
+                  },
+                  child: Text('Generate'),
+                ),
+              ],
             ),
             SizedBox(height: 20),
             ElevatedButton(
-              onPressed: _generatePassword,
-              child: Text('Générer un mot de passe'),
-            ),
-            ElevatedButton(
-              onPressed: _savePassword,
-              child: Text('Sauvegarder'),
+              onPressed: () {
+                // TODO: Add logic to save the password
+              },
+              child: Text('Save'),
             ),
           ],
         ),

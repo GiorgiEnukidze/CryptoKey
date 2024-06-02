@@ -1,22 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_kryptokey_1/password_list_page.dart';
+import 'password_list_page.dart';
 
-class LoginPage extends StatefulWidget {
-  @override
-  _LoginPageState createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
+class LoginPage extends StatelessWidget {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-
-  void _login() {
-    // Simulate a login process
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => PasswordListPage()),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +12,10 @@ class _LoginPageState extends State<LoginPage> {
         title: Text('Login'),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
+          children: [
             TextField(
               controller: _usernameController,
               decoration: InputDecoration(labelText: 'Username'),
@@ -40,7 +27,13 @@ class _LoginPageState extends State<LoginPage> {
             ),
             SizedBox(height: 20),
             ElevatedButton(
-              onPressed: _login,
+              onPressed: () {
+                // TODO: Add authentication logic
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => PasswordListPage()),
+                );
+              },
               child: Text('Login'),
             ),
           ],

@@ -1,8 +1,6 @@
 name: flutter_kryptokey_1
-description: "A new Flutter project."
-
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
-
+description: A new Flutter project.
+publish_to: 'none'
 version: 1.0.0+1
 
 environment:
@@ -12,10 +10,8 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.6
-  crypto: ^3.0.1
-  random_string: ^2.1.0
-  flutter_secure_storage: ^8.0.0
   encrypt: ^5.0.0
+  flutter_secure_storage: ^5.0.2
 
 dev_dependencies:
   flutter_test:
@@ -24,7 +20,3 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-  assets:
-    - assets/
-
-# Additional assets can be added here if required.

@@ -1,9 +1,4 @@
 import 'package:flutter/material.dart';
-import 'password_list_page.dart';
-import 'secure_note_page.dart';
-import 'bank_card_page.dart';
-import 'id_card_page.dart';
-import 'encryption_key_page.dart';
 
 class MenuDrawer extends StatelessWidget {
   @override
@@ -13,59 +8,39 @@ class MenuDrawer extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: <Widget>[
           DrawerHeader(
-            child: Text('Menu', style: TextStyle(color: Colors.white, fontSize: 24)),
+            child: Text('CryptoKey Menu'),
             decoration: BoxDecoration(
               color: Colors.blue,
             ),
           ),
           ListTile(
-            leading: Icon(Icons.lock),
-            title: Text('Mots de passe'),
+            title: Text('My Passwords'),
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => PasswordListPage()),
-              );
+              Navigator.pushNamed(context, '/passwords');
             },
           ),
           ListTile(
-            leading: Icon(Icons.note),
-            title: Text('Notes sécurisées'),
+            title: Text('Bank Cards'),
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => SecureNotePage()),
-              );
+              Navigator.pushNamed(context, '/bank_cards');
             },
           ),
           ListTile(
-            leading: Icon(Icons.credit_card),
-            title: Text('Cartes bancaires'),
+            title: Text('ID Cards'),
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => BankCardPage()),
-              );
+              Navigator.pushNamed(context, '/id_cards');
             },
           ),
           ListTile(
-            leading: Icon(Icons.perm_identity),
-            title: Text('Cartes d\'identité'),
+            title: Text('Encryption Keys'),
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => IdCardPage()),
-              );
+              Navigator.pushNamed(context, '/encryption_keys');
             },
           ),
           ListTile(
-            leading: Icon(Icons.vpn_key),
-            title: Text('Clés de cryptage'),
+            title: Text('Secure Notes'),
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => EncryptionKeyPage()),
-              );
+              Navigator.pushNamed(context, '/secure_notes');
             },
           ),
         ],

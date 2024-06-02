@@ -1,28 +1,39 @@
 import 'package:flutter/material.dart';
 
-class AddNotePage extends StatelessWidget {
+class AddNotePage extends StatefulWidget {
+  @override
+  _AddNotePageState createState() => _AddNotePageState();
+}
+
+class _AddNotePageState extends State<AddNotePage> {
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _noteController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Ajouter une note sécurisée'),
+        title: Text('Add Note'),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
             TextField(
-              decoration: InputDecoration(labelText: 'Titre de la note'),
+              controller: _titleController,
+              decoration: InputDecoration(labelText: 'Title'),
             ),
             TextField(
-              decoration: InputDecoration(labelText: 'Contenu de la note'),
-              maxLines: null, // Permet à l'utilisateur de saisir plusieurs lignes
+              controller: _noteController,
+              decoration: InputDecoration(labelText: 'Note'),
+              maxLines: 8,
             ),
+            SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                // Ajoutez ici la logique pour enregistrer la note sécurisée
+                // TODO: Add logic to save the note
               },
-              child: Text('Ajouter'),
+              child: Text('Save'),
             ),
           ],
         ),

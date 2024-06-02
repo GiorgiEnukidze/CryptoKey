@@ -3,8 +3,8 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class EncryptionService {
   final _storage = FlutterSecureStorage();
-  final _key = encrypt.Key.fromLength(32); // Adjust the length based on your needs
-  final _iv = encrypt.IV.fromLength(16);   // 16 bytes IV for AES
+  final _key = encrypt.Key.fromSecureRandom(32); // Adjust the length based on your needs
+  final _iv = encrypt.IV.fromLength(16);         // 16 bytes IV for AES
 
   late final encrypt.Encrypter _encrypter;
 

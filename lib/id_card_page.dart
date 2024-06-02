@@ -1,25 +1,29 @@
 import 'package:flutter/material.dart';
-import 'add_id_card_page.dart'; // Ajouter le fichier add_id_card_page.dart
-import 'menu_drawer.dart';
+import 'package:flutter_kryptokey_1/add_id_card_page.dart';
 
 class IdCardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Mes cartes d\'identité'),
+        title: Text('ID Cards'),
       ),
-      drawer: MenuDrawer(),
       body: Center(
-        child: Text('Liste des cartes d\'identité'),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text('Your ID Cards will be displayed here'),
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => AddIdCardPage()), // Remplacer AddIdCardPage() par le nom de votre page d'ajout de cartes d'identité
+            MaterialPageRoute(builder: (context) => AddIdCardPage()),
           );
         },
+        tooltip: 'Add ID Card',
         child: Icon(Icons.add),
       ),
     );
