@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:jwt_decode/jwt_decode.dart';
+import 'package:flutter_kryptokey_1/encryption_key_page.dart';
 
 class AddEncryptionKeyPage extends StatefulWidget {
   @override
@@ -6,8 +11,72 @@ class AddEncryptionKeyPage extends StatefulWidget {
 }
 
 class _AddEncryptionKeyPageState extends State<AddEncryptionKeyPage> {
-  final TextEditingController _keyNameController = TextEditingController();
-  final TextEditingController _encryptionKeyController = TextEditingController();
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _keyController = TextEditingController();
+  final storage = const FlutterSecureStorage();
+
+  Future<void> _addEncryptionKey() async {
+    try {
+      String? token = await storage.read(key: 'auth_token');
+      if (token == null) {
+        print('Auth token is null');
+        return;
+      }
+
+      Map<String, dynamic> decodedToken = Jwt.parseJwt(token);
+      print('Decoded token: $decodedToken');
+      String? userId = decodedToken['user_id']?.toString();
+      print('User ID: $userId');
+
+      if (userId == null) {
+        print('User ID not found in token');
+        return;
+      }
+
+      Map<String, dynamic> data = {
+        'user': userId,
+        'titles': _titleController.text,
+        'key': _keyController.text,
+      };
+
+      print('Data to send: $data');
+
+      final response = await http.post(
+        Uri.parse('http://127.0.0.1:8000/api/keys/add/'),
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json',
+        },
+        body: json.encode(data),
+      );
+
+      if (response.statusCode == 201) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Encryption key added successfully'),
+          ),
+        );
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => EncryptionKeyPage()),
+        );
+      } else {
+        print('Failed to add encryption key: ${response.body}');
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Failed to add encryption key'),
+          ),
+        );
+      }
+    } catch (e) {
+      print('Error occurred: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('An error occurred. Please try again.'),
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,20 +89,27 @@ class _AddEncryptionKeyPageState extends State<AddEncryptionKeyPage> {
         child: Column(
           children: [
             TextField(
-              controller: _keyNameController,
-              decoration: InputDecoration(labelText: 'Key Name'),
+              controller: _titleController,
+              decoration: InputDecoration(labelText: 'Title'),
             ),
             TextField(
-              controller: _encryptionKeyController,
-              decoration: InputDecoration(labelText: 'Encryption Key'),
-              obscureText: true,
+              controller: _keyController,
+              decoration: InputDecoration(labelText: 'Key'),
             ),
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                // TODO: Add logic to save the encryption key
+                if (_titleController.text.isEmpty || _keyController.text.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('All fields are required'),
+                    ),
+                  );
+                } else {
+                  _addEncryptionKey();
+                }
               },
-              child: Text('Save'),
+              child: Text('Add Encryption Key'),
             ),
           ],
         ),

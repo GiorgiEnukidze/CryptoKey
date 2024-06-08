@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'password_list_page.dart';
+import 'bank_card_page.dart';
+import 'id_card_page.dart';
+import 'encryption_key_page.dart';
+import 'secure_note_page.dart';
 
 class MenuDrawer extends StatelessWidget {
   @override
@@ -14,33 +19,48 @@ class MenuDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-            title: Text('My Passwords'),
+            title: Text('Password'),
             onTap: () {
-              Navigator.pushNamed(context, '/passwords');
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => PasswordListPage()),
+              );
             },
           ),
           ListTile(
-            title: Text('Bank Cards'),
+            title: Text('Bank Card'),
             onTap: () {
-              Navigator.pushNamed(context, '/bank_cards');
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => BankCardPage()),
+              );
             },
           ),
           ListTile(
-            title: Text('ID Cards'),
+            title: Text('ID Card'),
             onTap: () {
-              Navigator.pushNamed(context, '/id_cards');
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => IdCardPage()),
+              );
             },
           ),
           ListTile(
-            title: Text('Encryption Keys'),
+            title: Text('Encryption Key'),
             onTap: () {
-              Navigator.pushNamed(context, '/encryption_keys');
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => EncryptionKeyPage()),
+              );
             },
           ),
           ListTile(
-            title: Text('Secure Notes'),
+            title: Text('Secure Note'),
             onTap: () {
-              Navigator.pushNamed(context, '/secure_notes');
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => SecureNotePage()),
+              );
             },
           ),
         ],
