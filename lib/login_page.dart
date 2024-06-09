@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-import 'password_list_page.dart';
-import 'package:flutter_kryptokey_1/authentication_service.dart';
-import 'package:flutter_kryptokey_1/password_list_page.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'authentication_service.dart';
+import 'password_list_page.dart';
+import 'register_page.dart'; // Importez la page d'enregistrement
 
 class LoginPage extends StatelessWidget {
   final AuthenticationService _authService = AuthenticationService();
@@ -37,6 +35,13 @@ class LoginPage extends StatelessWidget {
         content: Text('Failed to login: $e'),
       ));
     }
+  }
+
+  void _navigateToRegister(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => RegisterPage()), // Navigation vers la page d'enregistrement
+    );
   }
 
   @override
@@ -75,6 +80,11 @@ class LoginPage extends StatelessWidget {
             ElevatedButton(
               onPressed: () => _login(context),
               child: Text('Login'),
+            ),
+            SizedBox(height: 20), // Espacement entre les boutons
+            TextButton(
+              onPressed: () => _navigateToRegister(context),
+              child: Text('Don\'t have an account? Register here'),
             ),
           ],
         ),

@@ -4,6 +4,7 @@ import 'bank_card_page.dart';
 import 'id_card_page.dart';
 import 'encryption_key_page.dart';
 import 'secure_note_page.dart';
+import 'profile_page.dart';
 
 class MenuDrawer extends StatelessWidget {
   @override
@@ -19,11 +20,29 @@ class MenuDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
+            title: Text('Profile'),
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => ProfilePage()),
+              );
+            },
+          ),
+          ListTile(
             title: Text('Password'),
             onTap: () {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => PasswordListPage()),
+              );
+            },
+          ),
+          ListTile(
+            title: Text('Secure Note'),
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => SecureNotePage()),
               );
             },
           ),
@@ -54,15 +73,7 @@ class MenuDrawer extends StatelessWidget {
               );
             },
           ),
-          ListTile(
-            title: Text('Secure Note'),
-            onTap: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => SecureNotePage()),
-              );
-            },
-          ),
+          
         ],
       ),
     );
