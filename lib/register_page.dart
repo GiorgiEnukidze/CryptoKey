@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-const String apiUrl = 'http://127.0.0.1:8000'; // Assurez-vous que cette URL est correcte pour votre API
+const String apiUrl = 'http://192.168.129.9:8000'; // Assurez-vous que cette URL est correcte pour votre API
 
 class RegisterPage extends StatefulWidget {
   @override

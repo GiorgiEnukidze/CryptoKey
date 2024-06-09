@@ -37,7 +37,7 @@ class _ProfilePageState extends State<ProfilePage> {
       }
 
       final response = await http.get(
-        Uri.parse('http://127.0.0.1:8000/api/profile/'),
+        Uri.parse('http://192.168.129.9:8000/api/profile/'),
         headers: {'Authorization': 'Bearer $token'},
       );
 
@@ -132,7 +132,7 @@ class _ProfilePageState extends State<ProfilePage> {
       var jsonData = jsonEncode(userData);
 
       final response = await http.patch(
-        Uri.parse('http://127.0.0.1:8000/api/profile/update/$userId/'),
+        Uri.parse('http://192.168.129.9:8000/api/profile/update/$userId/'),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $token',

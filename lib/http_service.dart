@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class HttpService {
-  static const String apiUrl = 'http://localhost:8000/api/token/';
+  static const String apiUrl = 'http://192.168.129.9:8000/api/token/';
 
   Future<String?> login(String username, String password) async {
     try {
@@ -29,7 +29,7 @@ class HttpService {
   }
 
   Future<void> fetchData(String token) async {
-    final String apiUrl = 'http://localhost:8000/api/passwords/';
+    final String apiUrl = 'http://192.168.129.9:8000/api/passwords/';
 
     final response = await http.get(
       Uri.parse(apiUrl),

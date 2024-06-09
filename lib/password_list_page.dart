@@ -114,7 +114,7 @@ class _PasswordListPageState extends State<PasswordListPage> {
     }
 
     final response = await http.get(
-      Uri.parse('http://127.0.0.1:8000/api/passwords/'),
+      Uri.parse('http://192.168.129.9:8000/api/passwords/'),
       headers: {
         'Authorization': 'Bearer $token',
       },
@@ -140,7 +140,7 @@ class _PasswordListPageState extends State<PasswordListPage> {
     }
 
     final response = await http.get(
-      Uri.parse('http://127.0.0.1:8000/api/share/'), // Endpoint pour récupérer les mots de passe partagés
+      Uri.parse('http://192.168.129.9:8000/api/share/'), // Endpoint pour récupérer les mots de passe partagés
       headers: {'Authorization': 'Bearer $token'},
     );
 
@@ -175,7 +175,7 @@ class _PasswordListPageState extends State<PasswordListPage> {
     }
 
     final response = await http.patch(
-      Uri.parse('http://127.0.0.1:8000/api/passwords/update/$passwordId/'),
+      Uri.parse('http://192.168.129.9:8000/api/passwords/update/$passwordId/'),
       headers: {
         'Authorization': 'Bearer $token',
         'Content-Type': 'application/json',
@@ -210,7 +210,7 @@ class _PasswordListPageState extends State<PasswordListPage> {
       }
 
       final response = await http.delete(
-        Uri.parse('http://127.0.0.1:8000/api/passwords/delete/$passwordId/'),
+        Uri.parse('http://192.168.129.9:8000/api/passwords/delete/$passwordId/'),
         headers: {
           'Authorization': 'Bearer $token',
         },

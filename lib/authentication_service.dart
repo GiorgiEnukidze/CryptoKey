@@ -5,7 +5,7 @@ import 'dart:convert';
 
 class AuthenticationService {
   Future<String?> login(String username, String password) async {
-    final String apiUrl = 'http://localhost:8000/api/token/';
+    final String apiUrl = 'http://192.168.129.9:8000/api/token/';
 
     final response = await http.post(
       Uri.parse(apiUrl),

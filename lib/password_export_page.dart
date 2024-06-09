@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'dart:io'; // Ajouter cette ligne pour importer les classes Directory et File
+import 'dart:io';
 import 'package:path_provider/path_provider.dart';
+import 'package:open_file/open_file.dart'; 
 
 class PasswordExportPage extends StatefulWidget {
   @override
@@ -11,7 +12,7 @@ class PasswordExportPage extends StatefulWidget {
 }
 
 class _PasswordExportPageState extends State<PasswordExportPage> {
-  String _selectedFormat = 'json'; // Format par défaut
+  String _selectedFormat = 'json';
   final storage = FlutterSecureStorage();
   List<dynamic> passwords = [];
 
@@ -77,6 +78,9 @@ class _PasswordExportPageState extends State<PasswordExportPage> {
       // Écrire les données exportées dans un fichier temporaire
       File file = File('$tempPath/passwords.$format');
       await file.writeAsString(response.body);
+
+      // Ouvrir le fichier téléchargé
+      OpenFile.open(file.path);
     } else {
       // Sinon, afficher un message d'échec avec le code de statut de la réponse
       print('Failed to export passwords. Status code: ${response.statusCode}');
@@ -89,16 +93,10 @@ class _PasswordExportPageState extends State<PasswordExportPage> {
 
 
   @override
-  void initState() {
-    super.initState();
-    fetchPasswords();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Export Passwords'), // Titre de la page d'exportation de mots de passe
+        title: Text('Export Passwords'),
       ),
       body: Center(
         child: Column(
